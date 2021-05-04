@@ -2,23 +2,8 @@
   <div class="wrapper" :class="{ 'nav-open': $sidebar.showSidebar }">
     <notifications></notifications>
 
-    <side-bar
-      :background-color="sidebarBackground"
-      short-title="GL"
-      title="IoTicos GL"
-    >
-      <template slot-scope="props" slot="links">
+    <SidebarContainer />
 
-        <sidebar-item
-          :link="{
-            name: 'Dashboard',
-            icon: 'tim-icons icon-chart-pie-36',
-            path: '/'
-          }"
-        >
-        </sidebar-item>
-      </template>
-    </side-bar>
     <!--Share plugin (for demo purposes). You can remove it if don't plan on using it-->
     <!-- <sidebar-share :background-color.sync="sidebarBackground"> </sidebar-share> -->
     <div class="main-panel" :data="sidebarBackground">
