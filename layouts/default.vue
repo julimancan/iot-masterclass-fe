@@ -5,7 +5,7 @@
     <SidebarContainer />
 
     <!--Share plugin (for demo purposes). You can remove it if don't plan on using it-->
-    <!-- <sidebar-share :background-color.sync="sidebarBackground"> </sidebar-share> -->
+    <sidebar-share :background-color.sync="sidebarBackground"> </sidebar-share>
     <div class="main-panel" :data="sidebarBackground">
       <dashboard-navbar></dashboard-navbar>
       <router-view name="header"></router-view>
@@ -59,7 +59,7 @@ export default {
   },
   data() {
     return {
-      sidebarBackground: "green", //vue|blue|orange|green|red|primary
+      sidebarBackground: "primary", //vue|blue|orange|green|red|primary
     };
   },
   computed: {
