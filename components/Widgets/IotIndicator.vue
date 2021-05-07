@@ -33,12 +33,9 @@ export default {
       console.log("received data: ", data)
       this.value = data.value;
     },
-    getIconColorClass() {
-      if (!this.value) {
-        return "text-dark"
-      }
-        return `text-${this.config.class}`;
-    }
+     getIconColorClass() {
+      !this.value ?  "text-dark"  : `text-${this.config.class}`;
+    },
   }
 };
 </script>

@@ -788,8 +788,8 @@ export default {
         this.widgets.push(JSON.parse(JSON.stringify(this.iotIndicatorConfig)));
       }
     },
-    deleteWidget() {
-      console.log("delete")
+    deleteWidget(index) {
+      this.widgets.splice(index, 1)
     },
     makeId(length) {
       var result = "";
