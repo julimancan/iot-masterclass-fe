@@ -15,7 +15,7 @@ export default {
   props: ["config"],
   data() {
     return {
-      value: false,
+      value: true,
     };
   },
 
