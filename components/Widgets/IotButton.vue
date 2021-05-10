@@ -50,7 +50,10 @@ export default {
       this.$nuxt.$emit("mqtt-sender", dataToSend);
     },
     getIconColorClass() {
-      !this.value ? "text-dark" : `text-${this.config.class}`;
+      if (!this.value) {
+        return "text-dark";
+      }
+      return `text-${this.config.class}`;
     },
   },
 };

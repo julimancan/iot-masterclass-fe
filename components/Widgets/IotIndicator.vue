@@ -6,7 +6,11 @@
         {{ config.variableFullName }}
       </h4>
     </div>
-    <i class="fa" :class="[config.icon, getIconColorClass()]" style="font-size: 3rem"></i>
+    <i
+      class="fa"
+      :class="[config.icon, getIconColorClass()]"
+      style="font-size: 3rem"
+    ></i>
   </card>
 </template>
 
@@ -21,7 +25,7 @@ export default {
 
   mounted() {
     const topic = `${this.config.userId}/${this.config.selectedDevice.dId}/${this.config.variable}/sdata`;
-    console.log(`topic`, topic)
+    console.log(`topic`, topic);
     this.$nuxt.$on(topic, this.processReceivedData);
   },
   beforeDestroy() {
@@ -30,12 +34,15 @@ export default {
   },
   methods: {
     processReceivedData(data) {
-      console.log("received data: ", data)
+      console.log("received data: ", data);
       this.value = data.value;
     },
-     getIconColorClass() {
-      !this.value ?  "text-dark"  : `text-${this.config.class}`;
+    getIconColorClass() {
+      if (!this.value) {
+        return "text-dark";
+      }
+      return `text-${this.config.class}`;
     },
-  }
+  },
 };
 </script>

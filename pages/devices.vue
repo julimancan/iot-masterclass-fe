@@ -30,9 +30,9 @@
               class="select-primary"
               style="width: 100%"
             >
-              <el-option class="text-dark" value="Template 1"></el-option>
-              <el-option class="text-dark" value="Template 2"></el-option>
-              <el-option class="text-dark" value="Template 3"></el-option>
+              <el-option class="text-dark" value="Template 1" label="Template 1"></el-option>
+              <el-option class="text-dark" value="Template 2" label="Template 2"></el-option>
+              <el-option class="text-dark" value="Template 3" label="Template 3"></el-option>
             </el-select>
           </div>
         </div>
