@@ -1,10 +1,9 @@
 const jwt = require('jsonwebtoken');
 
 let checkAuth = (req, res, next) => {
-    console.log(`here`.red)
     let token = req.get('token');
 
-    jwt.verify(token, "securePasswordHere ", (err, decoded) => {
+    jwt.verify(token, "securePasswordHere", (err, decoded) => {
 
         if (err){
           const response = {

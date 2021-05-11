@@ -11,7 +11,7 @@ const bcrypct = require("bcrypt");
 // GET = req.query
 
 // import models
-import User from "../models/users";
+import User from "../models/user";
 
 // AUTH
 

@@ -42,6 +42,15 @@ export default {
   ],
   //autoimport
   components: true,
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+      extensions: ["vue", "jsx"]
+    }
+  ],
+
+
   /*
   ** Nuxt.js dev-modules
   */

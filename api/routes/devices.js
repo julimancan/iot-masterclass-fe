@@ -1,15 +1,23 @@
 const express = require("express");
+const router = express.Router();
+
 const { checkAuth } = require("../middlewares/authentication");
+
 const colors = require("colors");
 
 
-const router = express.Router();
+// Models
+import Device from "../models/device";
 
+
+
+// APIs
 
 //  get a device
 router.get("/device", checkAuth, (req, res) => {
-  console.log("here".red)
   console.log(`req.userData`, req.userData);
+
+  req.userData.userId;
 
   const response = {
     status: "success",
@@ -22,14 +30,37 @@ router.get("/device", checkAuth, (req, res) => {
 
 
 
+// {
+//   "newDevice": {
+//     "dId": { "ASLDKJASD" },
+//     "name": { "DEVICE NAME" },
+//     "templateName": { "TEMPLATE NAME" },
+//     "templateId": { "ASLDKJASD" }
+//   }
+// }
 
 // input a new device to db
-router.post("/new-device", (req, res) => {
-  const data = {
-    status: "success",
-    data: req.body
-  };
-  res.json(data);
+router.post("/device", checkAuth, async (req, res) => {
+  try {
+    let newDevice = req.body.newDevice;
+    newDevice.userId = req.userData._id;
+    newDevice.createdTime = Date.now();
+    console.log(`newDevice`.yellow, newDevice);
+
+    const device = await Device.create(newDevice);
+
+    const response = {
+      status: "success",
+    };
+    return res.json(response);
+  } catch (error) {
+    console.log(`ERROR CREATING NEW DEVICE`.red, error)
+    const response = {
+      status: "error",
+      error
+    };
+    return res.status(500).json(response);
+  }
 });
 
 // delete a device from the db
@@ -45,3 +76,4 @@ router.put("/update-device", (req, res) => {
 
 module.exports = router;
 
+// FUNCTIONS
