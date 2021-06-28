@@ -1,4 +1,7 @@
-# app
+# IoT MasterClass Front-End
+
+## Description
+This project is the front-end for the IoT Project which allows you to connect your IoT sensors and store the information and control the devices.
 
 ## Build Setup
 

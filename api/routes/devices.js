@@ -13,20 +13,32 @@ import Device from "../models/device";
 
 // APIs
 
-//  get a device
-router.get("/device", checkAuth, (req, res) => {
-  console.log(`req.userData`, req.userData);
+// get DEVICES
+router.get("/device", checkAuth, async (req, res) => {
+  try {
 
-  req.userData.userId;
+    const userId = req.userData._id;
 
-  const response = {
-    status: "success",
-    data: "[1, 2, 3]",
-    message: "woohoo",
-  };
+    const devices = await Device.find({ userId })
 
-  return res.status(200).json(response);
-});
+
+    const response = {
+      status: "success",
+      data: devices,
+    };
+
+    return res.status(200).json(response);
+
+  } catch (error) {
+    const response = {
+      status: "error",
+      error
+    };
+    console.log(`error getting devices`, error);
+
+    return res.status(500).json(response);
+  }
+})
 
 
 
@@ -64,16 +76,73 @@ router.post("/device", checkAuth, async (req, res) => {
 });
 
 // delete a device from the db
-router.delete("/delete-device", (req, res) => {
-  res.send("hello from api/devices")
+router.delete("/device", checkAuth, async (req, res) => {
+
+  try {
+    const userId = req.userData._id;
+    const dId = req.query.dId;
+
+
+    const result = await Device.deleteOne({ userId, dId });
+
+    const response = {
+      status: "success",
+      data: result
+    };
+
+    return res.json(response);
+
+  } catch (error) {
+
+    console.log("ERROR DELETING DEVICE");
+    console.log(error);
+
+    const response = {
+      status: "error",
+      error: error
+    };
+
+    return res.status(500).json(response);
+  }
 });
 
 
+router.put("/device", checkAuth, (req, res) => {
 
-router.put("/update-device", (req, res) => {
-  res.send("hello from api/devices")
+
+  const dId = req.body.dId;
+  const userId = req.userData._id;
+
+  if (selectDevice(userId, dId)) {
+    const response = {
+      status: "success",
+    };
+    return res.json(response);
+  } else {
+    const response = {
+      status: "error",
+    };
+    return res.status(500).json(response);
+  }
+
 });
 
-module.exports = router;
 
 // FUNCTIONS
+const selectDevice = async (userId, dId) => {
+  try {
+    const result = await Device.updateMany({ userId }, { selected: false });
+    const result2 = await Device.updateOne({ dId, userId });
+
+    return true;
+  } catch (error) {
+    console.log(`error in function selectDevice`, error);
+    return false;
+  }
+
+}
+
+
+
+
+module.exports = router;
